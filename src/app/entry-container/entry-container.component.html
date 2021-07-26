@@ -1,0 +1,37 @@
+<ion-content align-self-center>
+  <form #form="ngForm" (ngSubmit)="addEntry(form)">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center>
+          <div padding>
+            <ion-item>
+              <ion-label>
+                Title:
+              </ion-label>
+              <ion-input name="entry-title" type="text"></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-label>
+                Date:
+              </ion-label>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-label>
+                Entry:
+              </ion-label>
+              <br>
+              <ion-textarea>
+
+              </ion-textarea>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
