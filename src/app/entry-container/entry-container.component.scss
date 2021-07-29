@@ -25,3 +25,22 @@
   #container a {
     text-decoration: none;
   }
+
+  ion-card {
+    margin: auto;
+    margin-top: 2%;
+    // width: 50%;
+
+    ion-input {
+      border-bottom: solid;
+    }
+
+    ion-textarea{
+      font-size: large;
+    }
+  }
+
+
+  ion-item {
+    border-bottom: solid;
+  }
