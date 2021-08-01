@@ -16,13 +16,17 @@ export class Tab2Page {
   constructor() {}
   title = "Reflect";
 
-  items: [
+  items = [
     {
       date: "today's date",
       title: "My Title!!!"
+    },
+    {
+      date: "yesterday's date",
+      title: "Old title..."
     }
   ];
 
 
-  
+
 }

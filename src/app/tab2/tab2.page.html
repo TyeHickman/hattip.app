@@ -21,46 +21,44 @@
           <ion-card-header>
 
           </ion-card-header>
-          <!-- <div text-center>
-          <h3>Login To Continue</h3>
-        </div> -->
+          
           <ion-card-content>
 
 
-  <ion-list>
-    <!-- <ion-item-sliding *ngFor="let item of items;"> -->
-      <ion-item-sliding>
-    <!-- <ion-item-sliding *ngFor="let item of loadItems(); let i = index"> -->
-      <ion-item>
-        <ion-label>
-          <h2 item-start>7-31-21</h2>
-        </ion-label>
-        <ion-label>
-          <p>You're a wizard Harry!</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options>
-        <!-- The clss vid has the children of ion-item-options as plain buttons but 
+            <ion-list>
+              <!-- <ion-item-sliding *ngFor="let item of items;"> -->
+              <ion-item-sliding *ngFor="let item of items">
+                <!-- <ion-item-sliding *ngFor="let item of loadItems(); let i = index"> -->
+                <ion-item>
+                  <ion-label>
+                    <h2 item-start>{{item.date}}</h2>
+                  </ion-label>
+                  <ion-label>
+                    <p>{{item.title}}</p>
+                  </ion-label>
+                </ion-item>
+                <ion-item-options>
+                  <!-- The clss vid has the children of ion-item-options as plain buttons but 
         we need to use 'ion-item-option' elements and 'ion-button' to qualify it
         as a button which will allow the colors to show properly-->
-        <ion-item-option (click)="editItem(item, i)" ion-button color="primary" icon-start>
-          <ion-icon name="create"></ion-icon>
-          Edit
-        </ion-item-option>
-        <ion-item-option (click)="shareItem(item, i)" ion-button color="light" icon-start>
-          <ion-icon name="share-social"></ion-icon>
-          Share
-        </ion-item-option>
-        <ion-item-option (click)="removeItem(item, i)" color="success" icon-start>
-          <ion-icon name="trash"></ion-icon>
-          Done
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+                  <ion-item-option (click)="editItem(item, i)" ion-button color="primary" icon-start>
+                    <ion-icon name="create"></ion-icon>
+                    Edit
+                  </ion-item-option>
+                  <ion-item-option (click)="shareItem(item, i)" ion-button color="light" icon-start>
+                    <ion-icon name="share-social"></ion-icon>
+                    Share
+                  </ion-item-option>
+                  <ion-item-option (click)="removeItem(item, i)" color="success" icon-start>
+                    <ion-icon name="trash"></ion-icon>
+                    Done
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
 
-  </ion-card-content>
-  </ion-card>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
