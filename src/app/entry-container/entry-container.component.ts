@@ -12,4 +12,10 @@ export class EntryContainerComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  user = 'Dev';
+  entryDate = new Date().toLocaleDateString();
+  prompt = 'What are you happy about?';
+  streak = 3;
+
 }

@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
+import { Entry } from '../entry-container/entry';
 import { ToastController } from '@ionic/angular';
-// import { AlertController } from '@ionic/angular';
-// import { GroceriesService } from '../groceries.service';
-// import { InputDialogService } from '../input-dialog.service';
-// import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 
 @Component({
@@ -15,18 +12,20 @@ export class Tab2Page {
 
   constructor() {}
   title = "Reflect";
+  items = [];
 
-  items = [
-    {
-      date: "today's date",
-      title: "My Title!!!"
-    },
-    {
-      date: "yesterday's date",
-      title: "Old title..."
-    }
-  ];
-
+  loadItems() {
+    // this.dataService.getItems()
+    //   .subscribe(
+    //     items => this.items = items,
+    //     error => this.errorMessage = <any>error
+    //   );
+    console.log("loading items...")
+  }
+  //TODO: define some methods...
+  editItem(item, index){
+    console.dir(item);
+  }
 
 
 }

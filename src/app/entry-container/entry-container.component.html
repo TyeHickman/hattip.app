@@ -5,20 +5,36 @@
         <ion-card>
           <ion-card-header>
             <ion-card-title>
-              {{User}}'s Journal
+              <h1>
+                {{user}}'s {{name}}
+              </h1>
             </ion-card-title>
             <ion-card-subtitle>
-              Today's Prompt: {{name}}
+              <hr>
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
+            <!-- probably need some kind of form -->
             <ion-grid>
               <ion-row>
-                <ion-col>
-                  <h2>{{name}}</h2>
+                <ion-col id="entryMetaLeft">
+                  <h1>Title: </h1>
+                  <ion-input type="text" 
+                            placeholder="{{user}}'s Entry for {{entryDate}}">
+                  </ion-input>
+                  <br>
+                  <br>
+                  <h1>Prompt: </h1>
+                  <br>
+                  <h1>{{prompt}}</h1>
                 </ion-col>
-                <ion-col>
-                  <h2>{{name}}</h2>
+
+                <ion-col id="entryMetaRight">
+                  <h1>Entry Date:</h1>
+                  <h2>{{entryDate}}</h2>
+                  <br>
+                  <h1>Streak:</h1>
+                  <h1 id="streakCounter">{{streak}}</h1>
                 </ion-col>
               </ion-row>
               <ion-row>
