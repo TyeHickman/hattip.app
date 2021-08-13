@@ -1,0 +1,169 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateJournal(
+  $input: CreateJournalInput!
+  $condition: ModelJournalConditionInput
+) {
+  createJournal(input: $input, condition: $condition) {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateJournal(
+  $input: UpdateJournalInput!
+  $condition: ModelJournalConditionInput
+) {
+  updateJournal(input: $input, condition: $condition) {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteJournal(
+  $input: DeleteJournalInput!
+  $condition: ModelJournalConditionInput
+) {
+  deleteJournal(input: $input, condition: $condition) {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateEntry(
+  $input: CreateEntryInput!
+  $condition: ModelEntryConditionInput
+) {
+  createEntry(input: $input, condition: $condition) {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateEntry(
+  $input: UpdateEntryInput!
+  $condition: ModelEntryConditionInput
+) {
+  updateEntry(input: $input, condition: $condition) {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteEntry(
+  $input: DeleteEntryInput!
+  $condition: ModelEntryConditionInput
+) {
+  deleteEntry(input: $input, condition: $condition) {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}

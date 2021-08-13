@@ -1,19 +1,19 @@
 type Journal @model {
-  journalId: ID!
+  id: ID!
   name: String!
-  entries: [Entry] @connection(keyName: "byJournal", fields: ["journalId"])
+  entries: [Entry] @connection(keyName: "byJournal", fields: ["id"])
   currentStreak: Int
   longestStreak: Int
   createdOn: AWSDate
   lastUpdate: AWSDate
 }
 
-type Entry @model @key(name: "byJournal", fields: ["journalId"]) {
-  entryId: ID!
+type Entry @model @key(name: "byJournal", fields: ["id"]) {
+  id: ID!
   entryTitle: String!
   entryBody: String
   journalId: ID!
-  journal: Journal @connection(fields: ["journalId"])
+  journal: Journal @connection(fields: ["id"])
   createdOn: AWSDate
   streakAtCreation: Int
 }

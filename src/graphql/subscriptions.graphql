@@ -1,0 +1,151 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateJournal {
+  onCreateJournal {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateJournal {
+  onUpdateJournal {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteJournal {
+  onDeleteJournal {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateEntry {
+  onCreateEntry {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateEntry {
+  onUpdateEntry {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteEntry {
+  onDeleteEntry {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}

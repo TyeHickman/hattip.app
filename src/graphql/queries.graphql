@@ -1,0 +1,102 @@
+# this is an auto generated file. This will be overwritten
+query GetJournal($id: ID!) {
+  getJournal(id: $id) {
+    id
+    name
+    entries {
+      items {
+        id
+        entryTitle
+        entryBody
+        journalId
+        createdOn
+        streakAtCreation
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    currentStreak
+    longestStreak
+    createdOn
+    lastUpdate
+    createdAt
+    updatedAt
+  }
+}
+query ListJournals(
+  $filter: ModelJournalFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJournals(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetEntry($id: ID!) {
+  getEntry(id: $id) {
+    id
+    entryTitle
+    entryBody
+    journalId
+    journal {
+      id
+      name
+      entries {
+        nextToken
+      }
+      currentStreak
+      longestStreak
+      createdOn
+      lastUpdate
+      createdAt
+      updatedAt
+    }
+    createdOn
+    streakAtCreation
+    createdAt
+    updatedAt
+  }
+}
+query ListEntries(
+  $filter: ModelEntryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      entryTitle
+      entryBody
+      journalId
+      journal {
+        id
+        name
+        currentStreak
+        longestStreak
+        createdOn
+        lastUpdate
+        createdAt
+        updatedAt
+      }
+      createdOn
+      streakAtCreation
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
