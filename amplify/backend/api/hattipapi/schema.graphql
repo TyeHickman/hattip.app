@@ -4,8 +4,8 @@ type Journal @model {
   entries: [Entry] @connection(keyName: "byJournal", fields: ["journalId"])
   currentStreak: Int
   longestStreak: Int
-  createdOn: Date
-  lastUpdate: Date
+  createdOn: AWSDate
+  lastUpdate: AWSDate
 }
 
 type Entry @model @key(name: "byJournal", fields: ["journalId"]) {
@@ -14,6 +14,6 @@ type Entry @model @key(name: "byJournal", fields: ["journalId"]) {
   entryBody: String
   journalId: ID!
   journal: Journal @connection(fields: ["journalId"])
-  createdOn: Date
+  createdOn: AWSDate
   streakAtCreation: Int
 }
