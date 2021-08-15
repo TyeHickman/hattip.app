@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { APIService } from '../API.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,21 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  constructor( private apiService: APIService ) {
+    
+  }
+
+  user : string;
+  entryDate : string;
+  prompt : string;
+  streak : number;
+
+  ionViewDidEnter() {
+    console.log("View entered the chat...");
+    this.user = 'Dev1';
+    this.entryDate = new Date().toLocaleDateString();
+    this.prompt = "What's beatiful about today?";
+    this.streak = 0
+  }
 
 }

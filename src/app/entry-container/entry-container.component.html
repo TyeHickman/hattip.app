@@ -1,59 +1,92 @@
 <ion-content>
+  
+  
   <ion-grid>
     <ion-row>
       <ion-col size-md="6" offset-md="3" offset-sm="0" size-sm="12">
         <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <h1>
-                {{user}}'s {{name}}
-              </h1>
-            </ion-card-title>
-            <ion-card-subtitle>
-              <hr>
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <!-- probably need some kind of form -->
-            <ion-grid>
-              <ion-row>
-                <ion-col id="entryMetaLeft">
-                  <h1>Title: </h1>
-                  <ion-input type="text" 
-                            placeholder="{{user}}'s Entry for {{entryDate}}">
-                  </ion-input>
-                  <br>
-                  <br>
-                  <h1>Prompt: </h1>
-                  <br>
-                  <h1>{{prompt}}</h1>
-                </ion-col>
+            <form #entryForm="ngForm" (ngSubmit)="submitEntryForm(entryForm)">
 
-                <ion-col id="entryMetaRight">
-                  <h1>Entry Date:</h1>
-                  <h2>{{entryDate}}</h2>
-                  <br>
-                  <h1>Streak:</h1>
-                  <h1 id="streakCounter">{{streak}}</h1>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col>
-                  <ion-textarea placeholder="Today's Entry" 
-                                inputmode="text" 
-                                spellcheck="true"
-                                maxlength="500"
-                                auto-grow="true"
-                                rows="15">
-                  </ion-textarea>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
+            <ion-card-header>
+              <ion-card-title>
+                <h1>
+                  {{user}}'s {{name}}
+                </h1>
+              </ion-card-title>
+              <ion-card-subtitle>
+                <hr>
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
 
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-  
+              <ion-grid>
+                <ion-row>
+                  <ion-col id="entryMetaLeft">
+                    <h1>Title: </h1>
+                    <ion-input  id="entryTitle"
+                                type="text" 
+                                placeholder="{{user}}'s Entry for {{entryDate}}" 
+                                name="entryTitle"
+                                ngModel
+                                required>
+                    </ion-input>
+                    <br>
+                    <br>
+                    <h1>Prompt: </h1>
+                    <br>
+                    <h1>{{prompt}}</h1>
+                  </ion-col>
+
+                  <ion-col id="entryMetaRight">
+                    <h1>Entry Date:</h1>
+                    <h2>{{entryDate}}</h2>
+                    <br>
+                    <h1>Streak:</h1>
+                    <h1 id="streakCounter">{{streak}}</h1>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-textarea placeholder="Today's Entry" inputmode="text" spellcheck="true" maxlength="500"
+                      autogrow="true" rows="10" name="entryBody" ngModel required>
+                    </ion-textarea>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-card-content>
+
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+              <ion-fab-button [disabled]="!entryForm.valid">
+                <ion-icon name="caret-up-outline"></ion-icon>
+              </ion-fab-button>
+        
+              <ion-fab-list side="{{btn.side}}" *ngFor="let btn of getActiveFabs()">
+                <ion-button  type="{{btn.type}}" color="medium">
+                  <ion-icon size="large" name="{{btn.iconName}}" color="{{btn.color}}"></ion-icon>
+                <!-- <ion-fab-button *ngFor="let btn of getActiveFabs()" (click)="btn.action()" type="{{btn.type}}"> -->
+                </ion-button>
+              </ion-fab-list>
+        
+            </ion-fab>
+            </form>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="caret-up-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-list side="{{btn.side}}" *ngFor="let btn of getActiveFabs()">
+        <ion-chip color={{btn.color}}>{{btn.type}}</ion-chip> -->
+        <!-- <ion-fab-button *ngFor="let btn of getActiveFabs()" (click)="btn.action()" type="{{btn.type}}"> -->
+          <!-- <ion-fab-button (click)="btn.action()">
+          <ion-icon size="large" name="{{btn.iconName}}" color="{{btn.color}}"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+
+    </ion-fab> -->
+  </ion-content>
