@@ -9,6 +9,7 @@ mutation CreateJournal(
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -37,6 +38,7 @@ mutation UpdateJournal(
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -65,6 +67,7 @@ mutation DeleteJournal(
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -89,6 +92,7 @@ mutation CreateEntry(
 ) {
   createEntry(input: $input, condition: $condition) {
     id
+    prompt
     entryTitle
     entryBody
     journalId
@@ -117,6 +121,7 @@ mutation UpdateEntry(
 ) {
   updateEntry(input: $input, condition: $condition) {
     id
+    prompt
     entryTitle
     entryBody
     journalId
@@ -145,6 +150,7 @@ mutation DeleteEntry(
 ) {
   deleteEntry(input: $input, condition: $condition) {
     id
+    prompt
     entryTitle
     entryBody
     journalId

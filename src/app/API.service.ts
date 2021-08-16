@@ -102,6 +102,7 @@ export type ModelEntryConnection = {
 export type Entry = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -127,6 +128,7 @@ export type DeleteJournalInput = {
 
 export type CreateEntryInput = {
   id?: string | null;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -135,6 +137,7 @@ export type CreateEntryInput = {
 };
 
 export type ModelEntryConditionInput = {
+  prompt?: ModelStringInput | null;
   entryTitle?: ModelStringInput | null;
   entryBody?: ModelStringInput | null;
   journalId?: ModelIDInput | null;
@@ -163,6 +166,7 @@ export type ModelIDInput = {
 
 export type UpdateEntryInput = {
   id: string;
+  prompt?: string | null;
   entryTitle?: string | null;
   entryBody?: string | null;
   journalId?: string | null;
@@ -194,6 +198,7 @@ export type ModelJournalConnection = {
 
 export type ModelEntryFilterInput = {
   id?: ModelIDInput | null;
+  prompt?: ModelStringInput | null;
   entryTitle?: ModelStringInput | null;
   entryBody?: ModelStringInput | null;
   journalId?: ModelIDInput | null;
@@ -213,6 +218,7 @@ export type CreateJournalMutation = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -240,6 +246,7 @@ export type UpdateJournalMutation = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -267,6 +274,7 @@ export type DeleteJournalMutation = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -288,6 +296,7 @@ export type DeleteJournalMutation = {
 export type CreateEntryMutation = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -315,6 +324,7 @@ export type CreateEntryMutation = {
 export type UpdateEntryMutation = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -342,6 +352,7 @@ export type UpdateEntryMutation = {
 export type DeleteEntryMutation = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -375,6 +386,7 @@ export type GetJournalQuery = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -416,6 +428,7 @@ export type ListJournalsQuery = {
 export type GetEntryQuery = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -445,6 +458,7 @@ export type ListEntriesQuery = {
   items?: Array<{
     __typename: "Entry";
     id: string;
+    prompt: string;
     entryTitle: string;
     entryBody?: string | null;
     journalId: string;
@@ -476,6 +490,7 @@ export type OnCreateJournalSubscription = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -503,6 +518,7 @@ export type OnUpdateJournalSubscription = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -530,6 +546,7 @@ export type OnDeleteJournalSubscription = {
     items?: Array<{
       __typename: "Entry";
       id: string;
+      prompt: string;
       entryTitle: string;
       entryBody?: string | null;
       journalId: string;
@@ -551,6 +568,7 @@ export type OnDeleteJournalSubscription = {
 export type OnCreateEntrySubscription = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -578,6 +596,7 @@ export type OnCreateEntrySubscription = {
 export type OnUpdateEntrySubscription = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -605,6 +624,7 @@ export type OnUpdateEntrySubscription = {
 export type OnDeleteEntrySubscription = {
   __typename: "Entry";
   id: string;
+  prompt: string;
   entryTitle: string;
   entryBody?: string | null;
   journalId: string;
@@ -647,6 +667,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -690,6 +711,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -733,6 +755,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -770,6 +793,7 @@ export class APIService {
         createEntry(input: $input, condition: $condition) {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -813,6 +837,7 @@ export class APIService {
         updateEntry(input: $input, condition: $condition) {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -856,6 +881,7 @@ export class APIService {
         deleteEntry(input: $input, condition: $condition) {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -902,6 +928,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -974,6 +1001,7 @@ export class APIService {
         getEntry(id: $id) {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -1017,6 +1045,7 @@ export class APIService {
           items {
             __typename
             id
+            prompt
             entryTitle
             entryBody
             journalId
@@ -1068,6 +1097,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -1103,6 +1133,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -1138,6 +1169,7 @@ export class APIService {
             items {
               __typename
               id
+              prompt
               entryTitle
               entryBody
               journalId
@@ -1167,6 +1199,7 @@ export class APIService {
         onCreateEntry {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -1202,6 +1235,7 @@ export class APIService {
         onUpdateEntry {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId
@@ -1237,6 +1271,7 @@ export class APIService {
         onDeleteEntry {
           __typename
           id
+          prompt
           entryTitle
           entryBody
           journalId

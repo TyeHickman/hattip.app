@@ -10,6 +10,7 @@ type Journal @model {
 
 type Entry @model @key(name: "byJournal", fields: ["id"]) {
   id: ID!
+  prompt: String!
   entryTitle: String!
   entryBody: String
   journalId: ID!

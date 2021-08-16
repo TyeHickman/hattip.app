@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {Validators, FormBuilder, FormGroup, NgForm} from '@angular/forms';
+import { Entry } from './entry';
+import { APIService } from '../API.service';
 
 
 
@@ -8,14 +10,16 @@ import {Validators, FormBuilder, FormGroup, NgForm} from '@angular/forms';
   templateUrl: './entry-container.component.html',
   styleUrls: ['./entry-container.component.scss'],
 })
-export class EntryContainerComponent {
+export class EntryContainerComponent{
   @Input() name: string;
   @Input() user: string;
-  @Input() entryDate: Date;
+  @Input() entryDate: string;
   @Input() prompt: string;
   @Input() streak: number;
 
   entryForm: FormGroup;
+
+  entry: Entry;
 
   fabButtons = [{
       iconName: "checkmark-circle-outline",
@@ -42,12 +46,23 @@ export class EntryContainerComponent {
     }
   ]
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, public apiService: APIService) {
     this.entryForm = this.formBuilder.group({
       entryTitle: ['', Validators.required],
       entryBody: ['', Validators.required],
     });
+
+    this.entry = {
+      journalId : '1ca040ee-8d00-4c94-958c-0320a361a964',
+      prompt : '',
+      createdOn : '',
+      entryTitle : '',
+      entryBody : '',
+      streakAtCreation : 0
+    };
     console.dir(this.entryForm.value);
+
+    console.dir(this.entry);
   }
 
   ngOnInit() {
@@ -66,12 +81,7 @@ export class EntryContainerComponent {
     }
   }
 
-  async saveEntry() {
-    console.log('Saving Entry...');
-    
-  }
-
-  clearEntry() {
+  clearEntryForm() {
     console.log('Clear Entry...');
   }
 
@@ -86,11 +96,32 @@ export class EntryContainerComponent {
     });
   }
 
-  submitEntryForm(entryForm : NgForm) {
+  submitEntryForm(entryForm : NgForm ) {
     console.log('Submit Form...');
     console.dir(this.entryForm);
     console.log(entryForm.value);
     console.log(entryForm.valid);
+    //Now we have the entry title and body..
+    //combine those with the inputs from the tab to creat and Entry object
+    this.buildEtnryItem(entryForm);
+  }
+
+  buildEtnryItem( entryForm : NgForm ){
+    console.log('Building Entry...');
+
+    
+    //TODO: Get our journal ID from the user...]
+    this.entry.streakAtCreation = this.streak;
+    this.entry.prompt = this.prompt;
+    this.entry.entryTitle = entryForm.value.entryTitle;
+    this.entry.entryBody = entryForm.value.entryBody;
+    this.entry.createdOn = this.entryDate;
+    console.dir(entryForm)
+    console.dir(this.entry);
+
+    this.apiService.CreateEntry(this.entry);
+
+    
   }
 
 }

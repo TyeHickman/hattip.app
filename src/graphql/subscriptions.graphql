@@ -6,6 +6,7 @@ subscription OnCreateJournal {
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -31,6 +32,7 @@ subscription OnUpdateJournal {
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -56,6 +58,7 @@ subscription OnDeleteJournal {
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -77,6 +80,7 @@ subscription OnDeleteJournal {
 subscription OnCreateEntry {
   onCreateEntry {
     id
+    prompt
     entryTitle
     entryBody
     journalId
@@ -102,6 +106,7 @@ subscription OnCreateEntry {
 subscription OnUpdateEntry {
   onUpdateEntry {
     id
+    prompt
     entryTitle
     entryBody
     journalId
@@ -127,6 +132,7 @@ subscription OnUpdateEntry {
 subscription OnDeleteEntry {
   onDeleteEntry {
     id
+    prompt
     entryTitle
     entryBody
     journalId

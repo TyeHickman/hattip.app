@@ -20,7 +20,7 @@ export class Tab1Page {
   ionViewDidEnter() {
     console.log("View entered the chat...");
     this.user = 'Dev1';
-    this.entryDate = new Date().toLocaleDateString();
+    this.entryDate = new Date().toISOString();
     this.prompt = "What's beatiful about today?";
     this.streak = 0
   }

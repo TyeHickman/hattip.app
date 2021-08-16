@@ -6,6 +6,7 @@ query GetJournal($id: ID!) {
     entries {
       items {
         id
+        prompt
         entryTitle
         entryBody
         journalId
@@ -49,6 +50,7 @@ query ListJournals(
 query GetEntry($id: ID!) {
   getEntry(id: $id) {
     id
+    prompt
     entryTitle
     entryBody
     journalId
@@ -79,6 +81,7 @@ query ListEntries(
   listEntries(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      prompt
       entryTitle
       entryBody
       journalId
