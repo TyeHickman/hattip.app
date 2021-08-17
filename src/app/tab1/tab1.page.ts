@@ -20,6 +20,7 @@ export class Tab1Page {
 
   ionViewDidEnter() {
     console.log("View entered the chat...");
+    //TODO: get user, streak, and prompt from user pool
     this.user = 'Dev1';
     this.entryDate = new Date().toISOString();
     this.prompt = "What's beatiful about today?";
