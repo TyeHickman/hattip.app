@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {Validators, FormBuilder, FormGroup, NgForm} from '@angular/forms';
+import { Router } from '@angular/router';
 import { Entry } from './entry';
 import { APIService } from '../API.service';
 
@@ -42,11 +43,18 @@ export class EntryContainerComponent{
       color: "success",
       isActive: false,
       // action: this.shareEntry,
-      type: "button"
+      type: "button",
+      sie: "top"
     }
   ]
 
-  constructor(public formBuilder: FormBuilder, public apiService: APIService) {
+  constructor(
+    public formBuilder: FormBuilder, 
+    public apiService: APIService, 
+    // public navExtra: NavigationExtras, 
+    public router: Router,
+    // private route: ActivatedRoute
+    ) {
     this.entryForm = this.formBuilder.group({
       entryTitle: ['', Validators.required],
       entryBody: ['', Validators.required],
@@ -81,9 +89,10 @@ export class EntryContainerComponent{
     }
   }
 
-  clearEntryForm() {
-    console.log('Clear Entry...');
-  }
+  // clearEntryForm() {
+  //   console.log('Clear Entry...');
+  //   document.getElementById("entryForm").reset();
+  // }
 
   shareEntry() {
     console.log('Sharing Entry...');
@@ -104,6 +113,7 @@ export class EntryContainerComponent{
     //Now we have the entry title and body..
     //combine those with the inputs from the tab to creat and Entry object
     this.buildEtnryItem(entryForm);
+    entryForm.reset();
   }
 
   buildEtnryItem( entryForm : NgForm ){
@@ -119,9 +129,16 @@ export class EntryContainerComponent{
     console.dir(entryForm)
     console.dir(this.entry);
 
-    this.apiService.CreateEntry(this.entry);
+    // this.apiService.CreateEntry(this.entry);
+
+    //go to journal view
+    this.goToJournal();
 
     
+  }
+
+  goToJournal() {
+    this.router.navigate(['tabs/tab2']);
   }
 
 }

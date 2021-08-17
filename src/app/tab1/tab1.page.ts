@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { APIService } from '../API.service';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
