@@ -24,7 +24,7 @@
 
               <div padding>
                 <ion-item>
-                  <ion-input name="name" type="text" placeholder="Name" ngModel required></ion-input>
+                  <ion-input name="username" type="text" placeholder="Choose a username" ngModel required></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
@@ -37,7 +37,10 @@
               </ion-item>
             </div>
             <div padding>
-              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block" (click)="openConfirm()">Register</ion-button>
+            </div>
+            <div id="confirmation">
+
             </div>
             
           </ion-card-content>
