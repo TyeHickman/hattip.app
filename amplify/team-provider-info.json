@@ -1,15 +1,26 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-hattipapp-dev-224605-authRole",
-      "UnauthRoleArn": "arn:aws:iam::894477672173:role/amplify-hattipapp-dev-224605-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::894477672173:role/amplify-hattipapp-dev-224605-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-hattipapp-dev-224605-deployment",
-      "UnauthRoleName": "amplify-hattipapp-dev-224605-unauthRole",
-      "StackName": "amplify-hattipapp-dev-224605",
-      "StackId": "arn:aws:cloudformation:us-east-1:894477672173:stack/amplify-hattipapp-dev-224605/d57eb160-fb1f-11eb-99ed-122daaaef175",
-      "AmplifyAppId": "d1zm9hep1aaw5o"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-hattipapp-dev-224605-authRole",
+            "UnauthRoleArn": "arn:aws:iam::894477672173:role/amplify-hattipapp-dev-224605-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::894477672173:role/amplify-hattipapp-dev-224605-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-hattipapp-dev-224605-deployment",
+            "UnauthRoleName": "amplify-hattipapp-dev-224605-unauthRole",
+            "StackName": "amplify-hattipapp-dev-224605",
+            "StackId": "arn:aws:cloudformation:us-east-1:894477672173:stack/amplify-hattipapp-dev-224605/d57eb160-fb1f-11eb-99ed-122daaaef175",
+            "AmplifyAppId": "d1zm9hep1aaw5o"
+        },
+        "categories": {
+            "auth": {
+                "hattipapp412f0f36": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1zm9hep1aaw5o",
+                    "type": "manual"
+                }
+            }
+        }
     }
-  }
 }
