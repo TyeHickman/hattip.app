@@ -9,9 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AuthModule } from  './auth/auth.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +24,14 @@ import { IonicStorageModule } from '@ionic/storage-angular';
               IonicModule.forRoot(), 
               AppRoutingModule, 
               AuthModule,
-              IonicStorageModule.forRoot()
+              IonicStorageModule.forRoot(),
+              JwtModule.forRoot({
+                config: {
+                  tokenGetter: tokenGetter,
+                  allowedDomains: ["amplifyapp.com"],
+                  // disallowedRoutes: ["http://example.com/examplebadroute/"],
+                },
+              })
             ],
   providers: [  { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -6,6 +6,7 @@ mutation CreateJournal(
   createJournal(input: $input, condition: $condition) {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -35,6 +36,7 @@ mutation UpdateJournal(
   updateJournal(input: $input, condition: $condition) {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -64,6 +66,7 @@ mutation DeleteJournal(
   deleteJournal(input: $input, condition: $condition) {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -99,6 +102,7 @@ mutation CreateEntry(
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }
@@ -128,6 +132,7 @@ mutation UpdateEntry(
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }
@@ -157,6 +162,7 @@ mutation DeleteEntry(
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }

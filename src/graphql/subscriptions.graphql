@@ -3,6 +3,7 @@ subscription OnCreateJournal {
   onCreateJournal {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -29,6 +30,7 @@ subscription OnUpdateJournal {
   onUpdateJournal {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -55,6 +57,7 @@ subscription OnDeleteJournal {
   onDeleteJournal {
     id
     name
+    userSub
     entries {
       items {
         id
@@ -87,6 +90,7 @@ subscription OnCreateEntry {
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }
@@ -113,6 +117,7 @@ subscription OnUpdateEntry {
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }
@@ -139,6 +144,7 @@ subscription OnDeleteEntry {
     journal {
       id
       name
+      userSub
       entries {
         nextToken
       }

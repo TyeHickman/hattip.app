@@ -1,6 +1,7 @@
 type Journal @model {
   id: ID!
   name: String!
+  userSub: ID!
   entries: [Entry] @connection(keyName: "byJournal", fields: ["id"])
   currentStreak: Int
   longestStreak: Int

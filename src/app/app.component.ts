@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { APIService } from './API.service';
-import { Journal } from './journal';
+// import { Journal } from './journal';
 
 @Component({
   selector: 'app-root',
@@ -8,24 +8,24 @@ import { Journal } from './journal';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  journal:Journal
+  // journal:Journal
 
   constructor( private apiService : APIService) {
 
-    this.initializeJournal();
+    // this.initializeJournal();
   }
 
-  initializeJournal() {
-    console.log("Initialize Development Journal...");
+  // initializeJournal() {
+  //   console.log("Initialize Development Journal...");
 
-    // this tries to get the dev journal
-    // TODO: change this method to find the Journal ID associated with the user.
-    this.apiService.GetJournal('1ca040ee-8d00-4c94-958c-0320a361a964').then((evt) => {
-      this.journal = evt;
-      console.dir(this.journal);
-    });
+  //   // this tries to get the dev journal
+  //   // TODO: change this method to find the Journal ID associated with the user.
+  //   this.apiService.GetJournal('1ca040ee-8d00-4c94-958c-0320a361a964').then((evt) => {
+  //     this.journal = evt;
+  //     console.dir(this.journal);
+  //   });
 
-  }
+  // }
 
 
 }

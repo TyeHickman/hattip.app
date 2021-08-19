@@ -12,6 +12,7 @@ export interface SubscriptionResponse<T> {
 export type CreateJournalInput = {
   id?: string | null;
   name: string;
+  userSub: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -20,6 +21,7 @@ export type CreateJournalInput = {
 
 export type ModelJournalConditionInput = {
   name?: ModelStringInput | null;
+  userSub?: ModelIDInput | null;
   currentStreak?: ModelIntInput | null;
   longestStreak?: ModelIntInput | null;
   createdOn?: ModelStringInput | null;
@@ -68,6 +70,22 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type ModelIDInput = {
+  ne?: string | null;
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  contains?: string | null;
+  notContains?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+  size?: ModelSizeInput | null;
+};
+
 export type ModelIntInput = {
   ne?: number | null;
   eq?: number | null;
@@ -84,6 +102,7 @@ export type Journal = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: ModelEntryConnection | null;
   currentStreak?: number | null;
   longestStreak?: number | null;
@@ -116,6 +135,7 @@ export type Entry = {
 export type UpdateJournalInput = {
   id: string;
   name?: string | null;
+  userSub?: string | null;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -148,22 +168,6 @@ export type ModelEntryConditionInput = {
   not?: ModelEntryConditionInput | null;
 };
 
-export type ModelIDInput = {
-  ne?: string | null;
-  eq?: string | null;
-  le?: string | null;
-  lt?: string | null;
-  ge?: string | null;
-  gt?: string | null;
-  contains?: string | null;
-  notContains?: string | null;
-  between?: Array<string | null> | null;
-  beginsWith?: string | null;
-  attributeExists?: boolean | null;
-  attributeType?: ModelAttributeTypes | null;
-  size?: ModelSizeInput | null;
-};
-
 export type UpdateEntryInput = {
   id: string;
   prompt?: string | null;
@@ -181,6 +185,7 @@ export type DeleteEntryInput = {
 export type ModelJournalFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
+  userSub?: ModelIDInput | null;
   currentStreak?: ModelIntInput | null;
   longestStreak?: ModelIntInput | null;
   createdOn?: ModelStringInput | null;
@@ -213,6 +218,7 @@ export type CreateJournalMutation = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -241,6 +247,7 @@ export type UpdateJournalMutation = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -269,6 +276,7 @@ export type DeleteJournalMutation = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -304,6 +312,7 @@ export type CreateEntryMutation = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -332,6 +341,7 @@ export type UpdateEntryMutation = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -360,6 +370,7 @@ export type DeleteEntryMutation = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -381,6 +392,7 @@ export type GetJournalQuery = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -411,6 +423,7 @@ export type ListJournalsQuery = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -436,6 +449,7 @@ export type GetEntryQuery = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -466,6 +480,7 @@ export type ListEntriesQuery = {
       __typename: "Journal";
       id: string;
       name: string;
+      userSub: string;
       currentStreak?: number | null;
       longestStreak?: number | null;
       createdOn?: string | null;
@@ -485,6 +500,7 @@ export type OnCreateJournalSubscription = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -513,6 +529,7 @@ export type OnUpdateJournalSubscription = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -541,6 +558,7 @@ export type OnDeleteJournalSubscription = {
   __typename: "Journal";
   id: string;
   name: string;
+  userSub: string;
   entries?: {
     __typename: "ModelEntryConnection";
     items?: Array<{
@@ -576,6 +594,7 @@ export type OnCreateEntrySubscription = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -604,6 +623,7 @@ export type OnUpdateEntrySubscription = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -632,6 +652,7 @@ export type OnDeleteEntrySubscription = {
     __typename: "Journal";
     id: string;
     name: string;
+    userSub: string;
     entries?: {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
@@ -662,6 +683,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -706,6 +728,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -750,6 +773,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -801,6 +825,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -845,6 +870,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -889,6 +915,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -923,6 +950,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -967,6 +995,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -1009,6 +1038,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -1053,6 +1083,7 @@ export class APIService {
               __typename
               id
               name
+              userSub
               currentStreak
               longestStreak
               createdOn
@@ -1092,6 +1123,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -1128,6 +1160,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -1164,6 +1197,7 @@ export class APIService {
           __typename
           id
           name
+          userSub
           entries {
             __typename
             items {
@@ -1207,6 +1241,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -1243,6 +1278,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
@@ -1279,6 +1315,7 @@ export class APIService {
             __typename
             id
             name
+            userSub
             entries {
               __typename
               nextToken
