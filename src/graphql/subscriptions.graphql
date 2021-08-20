@@ -18,6 +18,7 @@ subscription OnCreateJournal {
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -45,6 +46,7 @@ subscription OnUpdateJournal {
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -72,6 +74,7 @@ subscription OnDeleteJournal {
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -94,6 +97,7 @@ subscription OnCreateEntry {
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -121,6 +125,7 @@ subscription OnUpdateEntry {
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -148,6 +153,7 @@ subscription OnDeleteEntry {
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn

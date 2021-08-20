@@ -13,6 +13,7 @@ export type CreateJournalInput = {
   id?: string | null;
   name: string;
   userSub: string;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -22,6 +23,7 @@ export type CreateJournalInput = {
 export type ModelJournalConditionInput = {
   name?: ModelStringInput | null;
   userSub?: ModelIDInput | null;
+  prompt?: ModelStringInput | null;
   currentStreak?: ModelIntInput | null;
   longestStreak?: ModelIntInput | null;
   createdOn?: ModelStringInput | null;
@@ -104,6 +106,7 @@ export type Journal = {
   name: string;
   userSub: string;
   entries?: ModelEntryConnection | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -136,6 +139,7 @@ export type UpdateJournalInput = {
   id: string;
   name?: string | null;
   userSub?: string | null;
+  prompt?: string | null;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -186,6 +190,7 @@ export type ModelJournalFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
   userSub?: ModelIDInput | null;
+  prompt?: ModelStringInput | null;
   currentStreak?: ModelIntInput | null;
   longestStreak?: ModelIntInput | null;
   createdOn?: ModelStringInput | null;
@@ -235,6 +240,7 @@ export type CreateJournalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -264,6 +270,7 @@ export type UpdateJournalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -293,6 +300,7 @@ export type DeleteJournalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -317,6 +325,7 @@ export type CreateEntryMutation = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -346,6 +355,7 @@ export type UpdateEntryMutation = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -375,6 +385,7 @@ export type DeleteEntryMutation = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -409,6 +420,7 @@ export type GetJournalQuery = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -428,6 +440,7 @@ export type ListJournalsQuery = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -454,6 +467,7 @@ export type GetEntryQuery = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -481,6 +495,7 @@ export type ListEntriesQuery = {
       id: string;
       name: string;
       userSub: string;
+      prompt: string;
       currentStreak?: number | null;
       longestStreak?: number | null;
       createdOn?: string | null;
@@ -517,6 +532,7 @@ export type OnCreateJournalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -546,6 +562,7 @@ export type OnUpdateJournalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -575,6 +592,7 @@ export type OnDeleteJournalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  prompt: string;
   currentStreak?: number | null;
   longestStreak?: number | null;
   createdOn?: string | null;
@@ -599,6 +617,7 @@ export type OnCreateEntrySubscription = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -628,6 +647,7 @@ export type OnUpdateEntrySubscription = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -657,6 +677,7 @@ export type OnDeleteEntrySubscription = {
       __typename: "ModelEntryConnection";
       nextToken?: string | null;
     } | null;
+    prompt: string;
     currentStreak?: number | null;
     longestStreak?: number | null;
     createdOn?: string | null;
@@ -700,6 +721,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -745,6 +767,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -790,6 +813,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -830,6 +854,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -875,6 +900,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -920,6 +946,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -967,6 +994,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -1000,6 +1028,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -1043,6 +1072,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -1084,6 +1114,7 @@ export class APIService {
               id
               name
               userSub
+              prompt
               currentStreak
               longestStreak
               createdOn
@@ -1140,6 +1171,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -1177,6 +1209,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -1214,6 +1247,7 @@ export class APIService {
             }
             nextToken
           }
+          prompt
           currentStreak
           longestStreak
           createdOn
@@ -1246,6 +1280,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -1283,6 +1318,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn
@@ -1320,6 +1356,7 @@ export class APIService {
               __typename
               nextToken
             }
+            prompt
             currentStreak
             longestStreak
             createdOn

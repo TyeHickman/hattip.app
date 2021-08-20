@@ -3,6 +3,7 @@ type Journal @model {
   name: String!
   userSub: ID!
   entries: [Entry] @connection(keyName: "byJournal", fields: ["id"])
+  prompt: String!
   currentStreak: Int
   longestStreak: Int
   createdOn: AWSDateTime

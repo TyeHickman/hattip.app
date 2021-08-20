@@ -18,6 +18,7 @@ query GetJournal($id: ID!) {
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -39,6 +40,7 @@ query ListJournals(
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -63,6 +65,7 @@ query GetEntry($id: ID!) {
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -92,6 +95,7 @@ query ListEntries(
         id
         name
         userSub
+        prompt
         currentStreak
         longestStreak
         createdOn

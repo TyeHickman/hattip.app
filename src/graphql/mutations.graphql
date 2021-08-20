@@ -21,6 +21,7 @@ mutation CreateJournal(
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -51,6 +52,7 @@ mutation UpdateJournal(
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -81,6 +83,7 @@ mutation DeleteJournal(
       }
       nextToken
     }
+    prompt
     currentStreak
     longestStreak
     createdOn
@@ -106,6 +109,7 @@ mutation CreateEntry(
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -136,6 +140,7 @@ mutation UpdateEntry(
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn
@@ -166,6 +171,7 @@ mutation DeleteEntry(
       entries {
         nextToken
       }
+      prompt
       currentStreak
       longestStreak
       createdOn

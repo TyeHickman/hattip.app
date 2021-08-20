@@ -61,6 +61,7 @@ export class EntryContainerComponent{
     });
 
     this.entry = {
+      //TODO: get this from auth process...
       journalId : '1ca040ee-8d00-4c94-958c-0320a361a964',
       prompt : '',
       createdOn : '',

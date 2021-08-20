@@ -4,7 +4,7 @@ import { AuthService } from '../auth.service';
 import { Auth } from 'aws-amplify';
 import { AlertController } from '@ionic/angular';
 import { formatCurrency } from '@angular/common';
-import { APIService } from 'src/app/API.service';
+import { APIService, CreateJournalInput } from 'src/app/API.service';
 
 
 
@@ -32,20 +32,45 @@ export class RegisterPage implements OnInit {
   async register(form) {
     
     console.log(form.value);
-
-    //TODO: uncomment for real user registration
     try {
-      const { user } = await Auth.signUp({
+      // const { user } = 
+      await Auth.signUp({
           username : form.value.username,
           password : form.value.password,
           attributes: {
               email : form.value.email 
           }
+      }).then((suRes) => {
+        console.log(suRes);
+        let dateStamp = new Date();
+        
+        //TODO: create a journal once the user is signed up...
+        let journalInput : CreateJournalInput = {
+          name: form.value.username + "'s Journal",
+          userSub: suRes.userSub,
+          prompt: "What are you grateful for today?",
+          currentStreak: 0,
+          longestStreak: 0,
+          createdOn: dateStamp.toISOString(),
+          lastUpdate: dateStamp.toISOString()
+
+        }
+        this.apiService.CreateJournal(journalInput).then((res) => {
+          console.log(res);
+        })
+
       });
-      console.log(user);
+      // console.log(user);
+      // console.log(user.storage)
+
+
+      //open the confirm prompt for the emailed code.
+      this.openConfirm( form );
     } catch (error) {
       console.log('error signing up:', error);
     }
+
+
   }
 
   async openConfirm( form ) {
@@ -70,7 +95,7 @@ export class RegisterPage implements OnInit {
           text: 'Confirm',
           handler: data => {
             console.log('Confirming Account... ');
-            this.confirmSignUp(form.value.username, data.code);
+            this.confirmSignUp(form, data.code);
           }
         }
       ]
@@ -79,23 +104,45 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
 
-  async confirmSignUp(username, code) {
-    console.log("Sending Code for " + code);
+  async confirmSignUp(form, code) {
+    console.log("Sending Code for " + form.value.username);
     try {
-      await Auth.confirmSignUp(username, code);
+      let userSub = null;
+      await Auth.confirmSignUp(form.value.username, code).then((res) =>{
+        console.log(res);
+        if (res === 'SUCCESS'){
+          // this.router.navigate(['login']);
+          this.authService.login(form);
+        }
+        else {
+          this.openConfirm( form );
+        }
+      });
 
       //TODO: create a journal once the user is signed up...
+      // let journalInput : CreateJournalInput = {
+      //   name: username + "'s Journal",
+
+      // }
       // await this.apiService.CreateJournal()
       //is the user's 'sub' property permanent? it is...
       //use this as the userid for the journal interface.
+
+      
     } catch (error) {
         console.log('error confirming sign up', error);
     }
-    this.router.navigate(['login']);
+    
   }
 
   async resendCode( form ){
     this.openConfirm(form);
+    try {
+      await Auth.resendSignUp(form.value.username);
+      console.log('code resent successfully');
+  } catch (err) {
+      console.log('error resending code: ', err);
+  }
   }
 
 }
