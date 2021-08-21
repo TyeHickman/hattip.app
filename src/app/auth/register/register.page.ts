@@ -5,6 +5,8 @@ import { Auth } from 'aws-amplify';
 import { AlertController } from '@ionic/angular';
 import { formatCurrency } from '@angular/common';
 import { APIService, CreateJournalInput } from 'src/app/API.service';
+import { JournalService } from 'src/app/journal.service';
+import { Journal } from 'src/app/journal';
 
 
 
@@ -24,7 +26,8 @@ export class RegisterPage implements OnInit {
   constructor(  private  authService:  AuthService, 
                 private  router:  Router, 
                 public alertController: AlertController,
-                public apiService: APIService) { }
+                public apiService: APIService,
+                public journalService: JournalService) { }
 
   ngOnInit() {
   }
@@ -41,10 +44,11 @@ export class RegisterPage implements OnInit {
               email : form.value.email 
           }
       }).then((suRes) => {
-        console.log(suRes);
+        console.log("Creating New User Journal...");
+        // console.log(suRes)
         let dateStamp = new Date();
         
-        //TODO: create a journal once the user is signed up...
+        // //TODO: create a journal once the user is signed up...
         let journalInput : CreateJournalInput = {
           name: form.value.username + "'s Journal",
           userSub: suRes.userSub,
@@ -55,9 +59,7 @@ export class RegisterPage implements OnInit {
           lastUpdate: dateStamp.toISOString()
 
         }
-        this.apiService.CreateJournal(journalInput).then((res) => {
-          console.log(res);
-        })
+        this.journalService.createJournal(journalInput);
 
       });
       // console.log(user);
@@ -118,16 +120,6 @@ export class RegisterPage implements OnInit {
           this.openConfirm( form );
         }
       });
-
-      //TODO: create a journal once the user is signed up...
-      // let journalInput : CreateJournalInput = {
-      //   name: username + "'s Journal",
-
-      // }
-      // await this.apiService.CreateJournal()
-      //is the user's 'sub' property permanent? it is...
-      //use this as the userid for the journal interface.
-
       
     } catch (error) {
         console.log('error confirming sign up', error);

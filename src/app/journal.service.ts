@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs'
-import { map, catchError} from 'rxjs/operators';
+import { map, catchError, filter} from 'rxjs/operators';
+import { APIService, CreateJournalInput, ModelJournalFilterInput } from './API.service';
+import { Auth } from 'aws-amplify';
+import { Journal } from './journal'
 
 @Injectable({
   providedIn: 'root'
@@ -11,41 +14,44 @@ export class JournalService {
   
   dataChanged$: Observable<boolean>;
 
+  dateStamp: Date =  new Date();
+        
+
   private dataChangeSubject: Subject<boolean>;
 
-  baseURL = "http://localhost:8080";
+  
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public apiService: APIService) {
     console.debug("Journal Service is here to help!");
 
-    this.dataChangeSubject = new Subject<boolean>();
-    this.dataChanged$ = this.dataChangeSubject.asObservable();
-    console.log(this.dataChanged$);
+  }
+
+  async createJournal(journalInput: CreateJournalInput){
+    await this.apiService.CreateJournal(journalInput).then((journalRes) => {
+      console.log("Journal Created");
+      console.log(journalRes);
+    });
   }
 
 
-
-  getItems(): Observable<any> {
-    return this.http.get(this.baseURL + '/api/groceries').pipe(
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+  async getJournal(userSub: string) : Promise<Journal> {
+    let filter = {userSub: {eq: userSub}}
+    let foundJournal : Journal;
+    let journalList = await this.apiService.ListJournals(filter)
+    .then((res) =>{
+      console.log(res.items[0]);
+      foundJournal = {
+        id : res.items[0].id,
+        name : res.items[0].name,
+        prompt : res.items[0].prompt,
+        currentStreak : res.items[0].currentStreak
+      }
+      console.log(foundJournal);
+      return foundJournal;
+    })
+    return journalList
   }
 
-  private extractData(res: Response){
-    let body = res;
-    return body || {};
-  }
-
-  private handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-      const err = error || '';
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
-  }
+  
+  
 }

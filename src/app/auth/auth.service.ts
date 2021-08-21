@@ -21,6 +21,8 @@ export class AuthService {
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:3000';
   authSubject  =  new  BehaviorSubject(false);
   userJournal: Journal;
+  userInfo : User;
+  
 
   constructor(  private  httpClient:  HttpClient, 
                 private  storage:  Storage, 
@@ -53,12 +55,6 @@ export class AuthService {
     //TODO: move logout to service
   }
 
-  isLoggedIn() {
-    
-    //Use this for CanLoad in routing??
-    
-  }
-
   public isAuthenticated(): boolean {
     //example
     //CognitoIdentityServiceProvider.2re5hdsb5rotpru45pj41e5htr.testuser.idToken
@@ -71,6 +67,34 @@ export class AuthService {
     // true or false
     console.log(!this.jwtHelper.isTokenExpired(token));
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  getUserInfo() : User {
+    let username = localStorage.getItem('CognitoIdentityServiceProvider.2re5hdsb5rotpru45pj41e5htr.LastAuthUser');
+    let userDataKey = 'CognitoIdentityServiceProvider.2re5hdsb5rotpru45pj41e5htr.' + username +'.userData';
+    
+    const userData = localStorage.getItem(userDataKey);
+    // console.dir(JSON.parse(userData));
+    let userDataParsed = JSON.parse(userData);
+    console.log(userDataParsed.Username);
+    let userSub = userDataParsed.UserAttributes[0].Value;
+    let userName = userDataParsed.Username;
+    let userInfo = {
+      username : userName,
+      usersub : userSub
+    }
+    return userInfo;
+    
+
+    
+    // await Auth.currentUserInfo().then((userInfoRes)=>{
+      
+    //   console.log(userInfoRes);
+    //   this.userSub = userInfoRes;
+    // });
+
+    // return this.userSub;
+    
   }
 
   initializeJournal() {

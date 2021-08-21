@@ -3,6 +3,13 @@ import {Validators, FormBuilder, FormGroup, NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Entry } from './entry';
 import { APIService } from '../API.service';
+import { AuthService } from '../auth/auth.service';
+import { ObjectUnsubscribedError } from 'rxjs';
+import { Auth } from 'aws-amplify'
+import { JournalService } from '../journal.service';
+import { AWSAppSyncProvider } from '@aws-amplify/pubsub';
+import { User } from '../auth/user';
+import { Journal } from '../journal';
 
 
 
@@ -13,14 +20,21 @@ import { APIService } from '../API.service';
 })
 export class EntryContainerComponent{
   @Input() name: string;
-  @Input() user: string;
+  // @Input() user: string;
   @Input() entryDate: string;
-  @Input() prompt: string;
-  @Input() streak: number;
+  // @Input() prompt: string;
+  // @Input() streak: number;
 
   entryForm: FormGroup;
 
   entry: Entry;
+  userInfo : User;
+  username : string;
+  journalId: string;
+  journal : Journal;
+  prompt : string;
+  streak : number;
+
 
   fabButtons = [{
       iconName: "checkmark-circle-outline",
@@ -53,25 +67,36 @@ export class EntryContainerComponent{
     public apiService: APIService, 
     // public navExtra: NavigationExtras, 
     public router: Router,
+    private  authService:  AuthService,
+    public journalService: JournalService
     // private route: ActivatedRoute
     ) {
     this.entryForm = this.formBuilder.group({
       entryTitle: ['', Validators.required],
       entryBody: ['', Validators.required],
     });
-
-    this.entry = {
-      //TODO: get this from auth process...
-      journalId : '1ca040ee-8d00-4c94-958c-0320a361a964',
-      prompt : '',
-      createdOn : '',
-      entryTitle : '',
-      entryBody : '',
-      streakAtCreation : 0
-    };
     console.dir(this.entryForm.value);
 
-    console.dir(this.entry);
+    // console.dir(this.entry);
+    
+    this.userInfo = this.getUserInfo();
+    // this.userSub = this.getUserInfo();
+    this.username = this.userInfo.username;
+
+    this.journal = this.getJournalInfo(this.userInfo);
+    
+    // this.prompt = this.journal.prompt;
+
+    // this.entry = {
+    //   //TODO: get this from auth process...
+    //   journalId : this.journal.id,
+    //   prompt : this.journal.prompt,
+    //   createdOn : '',
+    //   entryTitle : '',
+    //   entryBody : '',
+    //   streakAtCreation : this.journal.currentStreak
+    // };
+
   }
 
   ngOnInit() {
@@ -122,15 +147,16 @@ export class EntryContainerComponent{
 
     
     //TODO: Get our journal ID from the user...]
-    this.entry.streakAtCreation = this.streak;
-    this.entry.prompt = this.prompt;
+    this.entry.journalId = this.journal.id;
+    this.entry.streakAtCreation = this.journal.currentStreak;
+    this.entry.prompt = this.journal.prompt;
     this.entry.entryTitle = entryForm.value.entryTitle;
     this.entry.entryBody = entryForm.value.entryBody;
     this.entry.createdOn = this.entryDate;
     console.dir(entryForm)
     console.dir(this.entry);
 
-    // this.apiService.CreateEntry(this.entry);
+    this.apiService.CreateEntry(this.entry);
 
     //go to journal view
     this.goToJournal();
@@ -140,6 +166,32 @@ export class EntryContainerComponent{
 
   goToJournal() {
     this.router.navigate(['tabs/tab2']);
+  }
+
+  getUserInfo() : User {
+    let ui = this.authService.getUserInfo()
+    console.log(ui);
+    return ui;
+  }
+
+  getJournalInfo(user: User) : Journal {
+    let sub = user.usersub;
+    let journ : Journal
+    let j = this.journalService.getJournal(sub).then((journalInfo) => {
+      console.log(journalInfo);
+      this.journal = {
+        id : journalInfo.id,
+        name : journalInfo.name,
+        prompt : journalInfo.prompt,
+        currentStreak : journalInfo.currentStreak
+      }
+      this.prompt = journalInfo.prompt;
+      this.streak = journalInfo.currentStreak;
+      this.journalId = journalInfo.id;
+      return this.journal
+    });
+    console.log(j);
+    return journ;
   }
 
 }
