@@ -37,7 +37,6 @@ export class AuthService {
 
 
   async login(form){
-    //TODO: move login method to service
     try {
       const user = await Auth.signIn(form.value.username, form.value.password);
       console.log(user);
@@ -47,6 +46,8 @@ export class AuthService {
       }
     } catch (error) {
       console.log('error signing in', error);
+      alert("Invalid Credentials!");
+      form.reset();
     }
   }
 

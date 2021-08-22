@@ -28,8 +28,12 @@
                                 placeholder=" > {{username}}'s Entry for {{entryDate}}" 
                                 name="entryTitle"
                                 ngModel
-                                required>
+                                required
+                                *ngIf="name === 'Daily Entry'">
                     </ion-input>
+                    <ion-item *ngIf="name !== 'Daily Entry'">
+                      {{username}}'s Entry for {{entryDate}}
+                    </ion-item>
                     <br>
                     <br>
                     <h1>Prompt: </h1>
@@ -47,27 +51,43 @@
                 </ion-row>
                 <ion-row>
                   <ion-col>
-                    <ion-textarea placeholder=" > Today's Entry" inputmode="text" spellcheck="true" maxlength="500"
-                    autogrow="true" rows="10" name="entryBody" ngModel required>
+                    <ion-textarea placeholder=" > Today's Entry" 
+                                  inputmode="text" 
+                                  spellcheck="true" 
+                                  maxlength="500"
+                                  autogrow="true" 
+                                  rows="10" 
+                                  name="entryBody" 
+                                  ngModel 
+                                  required
+                                  *ngIf="name === 'Daily Entry'">
                     </ion-textarea>
+                    <ion-item *ngIf="name !== 'Daily Entry'">
+                      {{entryBody}}
+                    </ion-item>
                   </ion-col>
                 </ion-row>
               </ion-grid>
 
             </ion-card-content>
 
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+            <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="name === 'Daily Entry'">
               <ion-fab-button [disabled]="!entryForm.valid">
                 <ion-icon name="caret-up-outline"></ion-icon>
               </ion-fab-button>
         
-              <ion-fab-list side="{{btn.side}}" *ngFor="let btn of getActiveFabs()">
+              <ion-fab-list side="{{btn.side}}" *ngFor="let btn of getActiveFabs()" >
                 <ion-button  type="{{btn.type}}" color="medium">
                   <ion-icon size="large" name="{{btn.iconName}}" color="{{btn.color}}"></ion-icon>
                 <!-- <ion-fab-button *ngFor="let btn of getActiveFabs()" (click)="btn.action()" type="{{btn.type}}"> -->
                 </ion-button>
               </ion-fab-list>
-        
+            </ion-fab>
+
+            <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="name !== 'Daily Entry'">
+              <ion-fab-button color="secondary" size="small" (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+              </ion-fab-button>
             </ion-fab>
             </form>
           </ion-card>

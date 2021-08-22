@@ -10,6 +10,8 @@ import { JournalService } from '../journal.service';
 import { AWSAppSyncProvider } from '@aws-amplify/pubsub';
 import { User } from '../auth/user';
 import { Journal } from '../journal';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { ModalController } from '@ionic/angular';
 
 
 
@@ -20,9 +22,10 @@ import { Journal } from '../journal';
 })
 export class EntryContainerComponent{
   @Input() name: string;
-  // @Input() user: string;
+  @Input() user?: string;
   @Input() entryDate: string;
-  // @Input() prompt: string;
+  @Input() pastPrompt?: string;
+  @Input() entryBody?: string;
   // @Input() streak: number;
 
   entryForm: FormGroup;
@@ -68,7 +71,8 @@ export class EntryContainerComponent{
     // public navExtra: NavigationExtras, 
     public router: Router,
     private  authService:  AuthService,
-    public journalService: JournalService
+    public journalService: JournalService,
+    public modalController: ModalController
     // private route: ActivatedRoute
     ) {
     this.entryForm = this.formBuilder.group({
@@ -144,18 +148,17 @@ export class EntryContainerComponent{
 
   buildEtnryItem( entryForm : NgForm ){
     console.log('Building Entry...');
+    console.log(entryForm.value)
+    this.entry = {
+      journalId: this.journalId,
+      prompt: this.journal.prompt,
+      entryTitle: entryForm.value.entryTitle,
+      entryBody: entryForm.value.entryBody,
+      createdOn: new Date().toISOString(),
+      streakAtCreation: this.streak
+    }
 
-    
-    //TODO: Get our journal ID from the user...]
-    this.entry.journalId = this.journal.id;
-    this.entry.streakAtCreation = this.journal.currentStreak;
-    this.entry.prompt = this.journal.prompt;
-    this.entry.entryTitle = entryForm.value.entryTitle;
-    this.entry.entryBody = entryForm.value.entryBody;
-    this.entry.createdOn = this.entryDate;
-    console.dir(entryForm)
-    console.dir(this.entry);
-
+    console.log(this.entry)
     this.apiService.CreateEntry(this.entry);
 
     //go to journal view
@@ -192,6 +195,10 @@ export class EntryContainerComponent{
     });
     console.log(j);
     return journ;
+  }
+
+  closeModal(){
+    this.modalController.dismiss({'dismissed' : true});
   }
 
 }

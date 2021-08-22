@@ -20,7 +20,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '/login',
     pathMatch: 'full'
+  },  {
+    path: 'entry-view-modal',
+    loadChildren: () => import('./modal/entry-view-modal/entry-view-modal.module').then( m => m.EntryViewModalPageModule)
   }
+
   
   
 ];
