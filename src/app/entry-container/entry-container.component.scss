@@ -16,24 +16,55 @@ $primary-color: #bbdad6;
     }
   }
 
+  ion-card-title{
+    color:$primary-color;
+  }
+
 
   ion-item {
     border-bottom: solid;
   }
 
-  #entryMetaLeft{
+  #entryMeta{
     ion-input{
+      border-color: $primary-color;
+    }
+
+    ion-item {
+      border-color: $primary-color;
+    }
+    padding-top: 2%;
+    text-align: center;
+  
+  
+  }
+
+
+  #streakCounter{
+      font-size: 300%;
+      color: $primary-color;
+      text-align: center;
+    }
+    
+  #pastEntryTitle{
+    color: $primary-color;
+
+    ion-item {
       border-color: $primary-color;
     }
   }
 
-  #entryMetaRight {
-    padding-top: 2%;
-    text-align: center;
+  #pastEntryBody {
+    padding-bottom: 15%;
 
+    color: $primary-color;
 
-    #streakCounter{
-      font-size: 300%;
-      color: $primary-color;
+    ion-item {
+      border-color: $primary-color;
     }
   }
+
+  #prompt{
+    color:$primary-color;
+  }
+

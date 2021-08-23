@@ -9,8 +9,10 @@ import { Storage } from  '@ionic/storage';
 import { User } from  './user';
 import { AuthResponse } from  './auth-response';
 import { APIService } from '../API.service';
+import { JournalService } from '../journal.service';
 import { Journal } from '../journal';
 import { Auth } from 'aws-amplify';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +24,14 @@ export class AuthService {
   authSubject  =  new  BehaviorSubject(false);
   userJournal: Journal;
   userInfo : User;
+  journal : Journal;
   
 
   constructor(  private  httpClient:  HttpClient, 
                 private  storage:  Storage, 
                 public jwtHelper: JwtHelperService, 
                 public apiService: APIService,
+                public journalService: JournalService,
                 public router: Router) { }
 
 
@@ -53,7 +57,15 @@ export class AuthService {
 
 
   async logout() {
-    //TODO: move logout to service
+    try {
+      Auth.signOut({ global: true });
+      console.log('Signout');
+      this.router.navigate(['login']);
+    }
+    catch (error){
+      console.log('error signing out: ')
+    }
+    
   }
 
   public isAuthenticated(): boolean {
@@ -80,21 +92,30 @@ export class AuthService {
     console.log(userDataParsed.Username);
     let userSub = userDataParsed.UserAttributes[0].Value;
     let userName = userDataParsed.Username;
-    let userInfo = {
+    
+    let userInfo : User = {
       username : userName,
-      usersub : userSub
+      usersub : userSub,
+      // userJournalID : this.journal.id
     }
+
+    let j = this.journalService.getJournal(userSub).then((journalInfo) => {
+      console.log(journalInfo);
+      this.journal = {
+        id : journalInfo.id,
+        name : journalInfo.name,
+        prompt : journalInfo.prompt,
+        currentStreak : journalInfo.currentStreak
+      }
+      userInfo.userJournalID = journalInfo.id;
+      return this.journal
+    });
+    // return journ;
+
+   
+    console.dir(userInfo);
+
     return userInfo;
-    
-
-    
-    // await Auth.currentUserInfo().then((userInfoRes)=>{
-      
-    //   console.log(userInfoRes);
-    //   this.userSub = userInfoRes;
-    // });
-
-    // return this.userSub;
     
   }
 

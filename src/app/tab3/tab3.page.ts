@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { APIService } from '../API.service';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user'
 
 @Component({
   selector: 'app-tab3',
@@ -7,11 +9,22 @@ import { APIService } from '../API.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
-  constructor(public apiService: APIService) {}
   title = "Resources";
-  user: string;
+  user: User;
 
 
+  constructor(
+    public apiService: APIService,
+    public authService: AuthService) {
+      this.user = this.authService.getUserInfo();
+    }
+  
+  
+
+
+
+  exitApp(){
+    this.authService.logout();
+  }
 
 }

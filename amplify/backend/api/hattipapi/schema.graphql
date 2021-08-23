@@ -10,7 +10,10 @@ type Journal @model {
   lastUpdate: AWSDateTime
 }
 
-type Entry @model @key(name: "byJournal", fields: ["id"]) {
+type Entry @model 
+  @key(name: "byJournal", fields: ["id"]) 
+  @key(name: "entriesByDate", fields: ["journalId","createdOn"], queryField: "entriesByDate")
+  {
   id: ID!
   prompt: String!
   entryTitle: String!

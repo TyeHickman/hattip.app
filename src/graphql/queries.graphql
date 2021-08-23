@@ -111,3 +111,45 @@ query ListEntries(
     nextToken
   }
 }
+query EntriesByDate(
+  $journalId: ID
+  $createdOn: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelEntryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  entriesByDate(
+    journalId: $journalId
+    createdOn: $createdOn
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      prompt
+      entryTitle
+      entryBody
+      journalId
+      journal {
+        id
+        name
+        userSub
+        prompt
+        currentStreak
+        longestStreak
+        createdOn
+        lastUpdate
+        createdAt
+        updatedAt
+      }
+      createdOn
+      streakAtCreation
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

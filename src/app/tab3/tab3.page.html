@@ -19,28 +19,36 @@
       <ion-col size-md="6" offset-md="3" offset-sm="0" size-sm="12">
         <ion-card>
           <ion-card-header>
-            <ion-grid>
-            <ion-row>
-                <ion-col>
-                  <h1>{{user}}'s Hat-Tip</h1>
-                </ion-col>
-              </ion-row>           
-            </ion-grid>
+            <ion-card-title>
+              <h1>{{user.username}}'s Hat-Tip</h1>
+            </ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-list>
               <ion-item>
-                <a href="">a helpful link</a>
+                <a href="https://github.com/TyeHickman/hattip.app">Find me on GitHub!!! </a>
+                <ion-icon name="logo-github"></ion-icon>
               </ion-item>
               <ion-item>
-                <a href="https://github.com/TyeHickman/hattip.app">Find me on GitHub!!!</a>
+                <a href="https://www.mindful.org/an-introduction-to-mindful-gratitude/">Mindful Gratitude</a>
               </ion-item>
+              <ion-item>
+                <a href="https://www.psychologytoday.com/us/blog/mindfulness-insights/201906/mindfulness-and-gratitude">Psychology Today</a>
+              </ion-item>                
             </ion-list>
-          <ion-fab vertical="top" horizontal="end" slot="fixed">
+            <div id="notAhero">
+              <ion-img src="./assets/thanks.svg"></ion-img>
+            </div>
+            
+          <ion-fab vertical="top" horizontal="end" slot="fixed" id="appSettings">
             <ion-fab-button>
-              <ion-icon size="large" name="settings-sharp"></ion-icon>
+              <ion-icon size="large" name="settings-sharp" ></ion-icon>
             </ion-fab-button>
+            <ion-fab-list side="start">
+                <ion-chip (click)="exitApp()"><ion-icon name="exit" ></ion-icon> Logout</ion-chip>
+            </ion-fab-list>
           </ion-fab>
+          
           
           </ion-card-content>
 

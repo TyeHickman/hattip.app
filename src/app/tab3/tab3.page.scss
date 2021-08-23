@@ -1,0 +1,38 @@
+$primary-color: #bbdad6;
+
+a, a:hover, a:visited {
+    color: $primary-color;
+    text-decoration: none;
+}
+
+$primary-color: #bbdad6;
+ion-title{
+    color: $primary-color;
+}
+
+ion-card-title{
+    color: $primary-color;
+}
+
+
+#appSettings {
+    ion-fab-button, ion-chip{
+        --background: gray;
+        color: $primary-color
+    }
+    ion-icon {
+        color: $primary-color;
+    }
+    ion-button {
+        --background: transparent;
+    }
+}
+
+#notAhero {
+    ion-img{
+        // background-color: $primary-color;
+        align-self: center;
+    }
+    background-color: transparent;
+    justify-content: center;
+}

@@ -26,7 +26,8 @@ export class EntryContainerComponent{
   @Input() entryDate: string;
   @Input() pastPrompt?: string;
   @Input() entryBody?: string;
-  // @Input() streak: number;
+  @Input() streakAtCreation?: number;
+  @Input() entryTitle?: string;
 
   entryForm: FormGroup;
 

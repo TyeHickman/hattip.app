@@ -1,9 +1,4 @@
-<ion-content>
-  
-  
-  <ion-grid>
-    <ion-row>
-      <ion-col size-md="6" offset-md="3" offset-sm="0" size-sm="12">
+
         <ion-card>
             <form #entryForm="ngForm" (ngSubmit)="submitEntryForm(entryForm)">
 
@@ -20,8 +15,21 @@
             <ion-card-content>
 
               <ion-grid>
+
+                <ion-row id="entryMeta">
+                  <ion-col >
+                    <h1>Entry Date:</h1>
+                    <h2>{{entryDate}}</h2>
+                  </ion-col>
+                  <ion-col>
+                    <h1>Streak:</h1>
+                    <h1 id="streakCounter">{{streak}}</h1>
+                  </ion-col>
+
+                </ion-row>
                 <ion-row>
-                  <ion-col id="entryMetaLeft">
+
+                  <ion-col>
                     <h1>Title: </h1>
                     <ion-input  id="entryTitle"
                                 type="text" 
@@ -31,24 +39,18 @@
                                 required
                                 *ngIf="name === 'Daily Entry'">
                     </ion-input>
-                    <ion-item *ngIf="name !== 'Daily Entry'">
-                      {{username}}'s Entry for {{entryDate}}
+                    <ion-item *ngIf="name !== 'Daily Entry'" id="pastEntryTitle">
+                      {{entryTitle}}
                     </ion-item>
-                    <br>
-                    <br>
-                    <h1>Prompt: </h1>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col id="prompt">
                     <br>
                     <h1>{{prompt}}</h1>
                   </ion-col>
-
-                  <ion-col id="entryMetaRight">
-                    <h1>Entry Date:</h1>
-                    <h2>{{entryDate}}</h2>
-                    <br>
-                    <h1>Streak:</h1>
-                    <h1 id="streakCounter">{{streak}}</h1>
-                  </ion-col>
                 </ion-row>
+                
                 <ion-row>
                   <ion-col>
                     <ion-textarea placeholder=" > Today's Entry" 
@@ -56,13 +58,13 @@
                                   spellcheck="true" 
                                   maxlength="500"
                                   autogrow="true" 
-                                  rows="10" 
+                                  rows="8" 
                                   name="entryBody" 
                                   ngModel 
                                   required
                                   *ngIf="name === 'Daily Entry'">
                     </ion-textarea>
-                    <ion-item *ngIf="name !== 'Daily Entry'">
+                    <ion-item *ngIf="name !== 'Daily Entry'" id="pastEntryBody">
                       {{entryBody}}
                     </ion-item>
                   </ion-col>
@@ -91,22 +93,4 @@
             </ion-fab>
             </form>
           </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button>
-        <ion-icon name="caret-up-outline"></ion-icon>
-      </ion-fab-button>
-
-      <ion-fab-list side="{{btn.side}}" *ngFor="let btn of getActiveFabs()">
-        <ion-chip color={{btn.color}}>{{btn.type}}</ion-chip> -->
-        <!-- <ion-fab-button *ngFor="let btn of getActiveFabs()" (click)="btn.action()" type="{{btn.type}}"> -->
-          <!-- <ion-fab-button (click)="btn.action()">
-          <ion-icon size="large" name="{{btn.iconName}}" color="{{btn.color}}"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-
-    </ion-fab> -->
-  </ion-content>
+        

@@ -219,6 +219,21 @@ export type ModelEntryFilterInput = {
   not?: ModelEntryFilterInput | null;
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null;
+  le?: string | null;
+  lt?: string | null;
+  ge?: string | null;
+  gt?: string | null;
+  between?: Array<string | null> | null;
+  beginsWith?: string | null;
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC"
+}
+
 export type CreateJournalMutation = {
   __typename: "Journal";
   id: string;
@@ -482,6 +497,36 @@ export type GetEntryQuery = {
 };
 
 export type ListEntriesQuery = {
+  __typename: "ModelEntryConnection";
+  items?: Array<{
+    __typename: "Entry";
+    id: string;
+    prompt: string;
+    entryTitle: string;
+    entryBody?: string | null;
+    journalId: string;
+    journal?: {
+      __typename: "Journal";
+      id: string;
+      name: string;
+      userSub: string;
+      prompt: string;
+      currentStreak?: number | null;
+      longestStreak?: number | null;
+      createdOn?: string | null;
+      lastUpdate?: string | null;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    createdOn?: string | null;
+    streakAtCreation?: number | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
+};
+
+export type EntriesByDateQuery = {
   __typename: "ModelEntryConnection";
   items?: Array<{
     __typename: "Entry";
@@ -1144,6 +1189,69 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListEntriesQuery>response.data.listEntries;
+  }
+  async EntriesByDate(
+    journalId?: string,
+    createdOn?: ModelStringKeyConditionInput,
+    sortDirection?: ModelSortDirection,
+    filter?: ModelEntryFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<EntriesByDateQuery> {
+    const statement = `query EntriesByDate($journalId: ID, $createdOn: ModelStringKeyConditionInput, $sortDirection: ModelSortDirection, $filter: ModelEntryFilterInput, $limit: Int, $nextToken: String) {
+        entriesByDate(journalId: $journalId, createdOn: $createdOn, sortDirection: $sortDirection, filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            prompt
+            entryTitle
+            entryBody
+            journalId
+            journal {
+              __typename
+              id
+              name
+              userSub
+              prompt
+              currentStreak
+              longestStreak
+              createdOn
+              lastUpdate
+              createdAt
+              updatedAt
+            }
+            createdOn
+            streakAtCreation
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (journalId) {
+      gqlAPIServiceArguments.journalId = journalId;
+    }
+    if (createdOn) {
+      gqlAPIServiceArguments.createdOn = createdOn;
+    }
+    if (sortDirection) {
+      gqlAPIServiceArguments.sortDirection = sortDirection;
+    }
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <EntriesByDateQuery>response.data.entriesByDate;
   }
   OnCreateJournalListener: Observable<
     SubscriptionResponse<OnCreateJournalSubscription>

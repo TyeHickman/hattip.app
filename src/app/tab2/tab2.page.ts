@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { Entry } from '../entry-container/entry';
 import { ToastController } from '@ionic/angular';
-import { APIService } from '../API.service';
+import { APIService, EntriesByDateQuery, ModelSortDirection } from '../API.service';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { EntryViewModalPage } from '../modal/entry-view-modal/entry-view-modal.page';
 import { IonRouterOutlet } from '@ionic/angular';
-
+import { SortDirection } from 'aws-amplify';
+import { User } from '../auth/user';
+import { AuthService } from '../auth/auth.service';
+import { filter } from 'rxjs/operators';
+import { API, graphqlOperation } from '@aws-amplify/api';
 
 
 @Component({
@@ -21,13 +25,15 @@ export class Tab2Page {
     public apiService: APIService, 
     public router: Router, 
     public modalController: ModalController,
+    public authService: AuthService,
     private routerOutlet: IonRouterOutlet
-    ) {}
+    ) { this.getUserInfo()}
   title = "Reflect";
   items = [];
   errorMessage: string;
   EntryDetail : Entry;
   itemOpen = true;
+  user : User;
 
 
   openItem(item, index){
@@ -43,7 +49,12 @@ export class Tab2Page {
       component: EntryViewModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'name' : 'A prop'
+        'name' : item.entryTitle,
+        'pastPrompt' : item.prompt,
+        'entryDate' : item.createdOn,
+        'entryTitle' : item.entryTitle,
+        'entryBody' : item.entryBody
+
       },
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
@@ -67,16 +78,29 @@ export class Tab2Page {
   }
 
   loadEntries(){
-    this.apiService.ListEntries().then((res) => {
-      res.items.forEach(entryItem => {
+
+    let userInfo = this.authService.getUserInfo();
+    let jId = userInfo.userJournalID;
+    console.log(userInfo);
+
+    this.apiService.ListEntries().then((list) => {
+      list.items.forEach(entryItem => {
         let n = formatDate(entryItem.createdOn, 'MM / dd', 'en-US');
         entryItem.createdOn = n;
         console.log(entryItem);
       });
-      this.items = res.items;
-      // console.log(res.items);
+      this.items = list.items;
+      console.log( "list entries response:");
+      console.dir( list.items)
     });
+
     console.log('Loading Entries....');
+  }
+
+  getUserInfo() : User{
+    let ui = this.authService.getUserInfo()
+    this.user = ui;
+    return this.user;
   }
 
 
